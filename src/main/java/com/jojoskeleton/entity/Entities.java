@@ -16,15 +16,12 @@ import static com.jojoskeleton.MainMod.MODID;
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Entities {
 
-    public static DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister
             .create(ForgeRegistries.ENTITY_TYPES,MODID);
 
-    public static RegistryObject<EntityType<JojoSkeleton>> JOJOSKELETON = ENTITIES
+    public static final  RegistryObject<EntityType<JojoSkeleton>> JOJOSKELETON = ENTITIES
             .register("jojo_skeleton", () -> EntityType
                     .Builder.of(JojoSkeleton::new, MobCategory.MONSTER)
-                    .fireImmune()
-                    .canSpawnFarFromPlayer()
-                    .sized(3,3)
                     .build("jojo_skeleton"));
 
     @SubscribeEvent
@@ -32,9 +29,6 @@ public class Entities {
         event.put(JOJOSKELETON.get(),JojoSkeleton.attributes);
     }
 
-    public static void register(IEventBus modEventBus){
-        ENTITIES.register(modEventBus);
-    }
 
 
 

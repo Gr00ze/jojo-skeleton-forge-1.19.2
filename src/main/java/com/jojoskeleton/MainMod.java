@@ -2,6 +2,7 @@ package com.jojoskeleton;
 
 
 import com.jojoskeleton.entity.Entities;
+import com.jojoskeleton.entity.TestEntity;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -17,7 +18,8 @@ public class MainMod {
 
     public MainMod(){
         IEventBus iEventBus =  FMLJavaModLoadingContext.get().getModEventBus();
+        Entities.ENTITIES.register(iEventBus);
+        TestEntity.ENTITIES.register(iEventBus);
         MinecraftForge.EVENT_BUS.register(this);
-        Entities.register(iEventBus);
     }
 }
