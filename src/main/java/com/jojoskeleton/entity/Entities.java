@@ -2,7 +2,9 @@ package com.jojoskeleton.entity;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,11 +24,14 @@ public class Entities {
     public static final  RegistryObject<EntityType<JojoSkeleton>> JOJOSKELETON = ENTITIES
             .register("jojo_skeleton", () -> EntityType
                     .Builder.of(JojoSkeleton::new, MobCategory.MONSTER)
+                    .fireImmune()
                     .build("jojo_skeleton"));
 
     @SubscribeEvent
     public static void addAttributes(EntityAttributeCreationEvent event){
-        event.put(JOJOSKELETON.get(),JojoSkeleton.attributes);
+        event.put(JOJOSKELETON.get(), Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH,100)
+                .build());
     }
 
 

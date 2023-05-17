@@ -17,11 +17,12 @@ import static com.jojoskeleton.entity.Entities.JOJOSKELETON;
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RenderModelLoader {
-    static final ModelLayerLocation JOJOSKELETONMLL = new ModelLayerLocation(new ResourceLocation("joj"),"main");
+    static final ModelLayerLocation JOJOSKELETONMLL = new ModelLayerLocation(new ResourceLocation("jojo_skeleton"),"main");
+
     @SubscribeEvent
-    public void registerRender(RegisterRenderers e){
+    public static void registerRender(RegisterRenderers e){
         e.registerEntityRenderer(JOJOSKELETON.get(),
-                provider-> new JojoSkeletonRender(
+                provider -> new JojoSkeletonRender(
                         provider,
                         new JojoSkeletonModel<>(provider.bakeLayer(JOJOSKELETONMLL)),
                         0));
@@ -29,7 +30,7 @@ public class RenderModelLoader {
 
 
     @SubscribeEvent
-    public void registerModels(RegisterLayerDefinitions e){
+    public static void registerModels(RegisterLayerDefinitions e){
         e.registerLayerDefinition(JOJOSKELETONMLL, JojoSkeletonModel::createModel);
     }
 }
