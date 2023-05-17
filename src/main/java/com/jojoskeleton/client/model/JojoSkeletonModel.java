@@ -1,5 +1,6 @@
 package com.jojoskeleton.client.model;
 
+import com.jojoskeleton.entity.JojoSkeleton;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.LayerDefinitions;
 import net.minecraft.client.model.geom.ModelPart;
@@ -9,7 +10,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.world.entity.Entity;
 
-public class JojoSkeletonModel extends HierarchicalModel {
+public class JojoSkeletonModel<T extends JojoSkeleton> extends HierarchicalModel<T> {
 
     private final ModelPart root;
 
@@ -32,7 +33,9 @@ public class JojoSkeletonModel extends HierarchicalModel {
     }
 
     @Override
-    public void setupAnim(Entity p_102618_, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
+    public void setupAnim(T entity, float p_102619_, float p_102620_, float p_102621_, float p_102622_, float p_102623_) {
 
     }
+
+
 }

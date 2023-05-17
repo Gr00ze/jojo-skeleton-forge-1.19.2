@@ -32,6 +32,10 @@ public class Entities {
         event.put(JOJOSKELETON.get(),JojoSkeleton.attributes);
     }
 
+    public static void register(IEventBus modEventBus){
+        ENTITIES.register(modEventBus);
+    }
+
 
 
 

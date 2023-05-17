@@ -1,24 +1,25 @@
 package com.jojoskeleton.client.render;
 
 import com.jojoskeleton.client.model.JojoSkeletonModel;
+import com.jojoskeleton.entity.JojoSkeleton;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 
-public class JojoSkeletonRender extends MobRenderer {
-    public JojoSkeletonRender(EntityRendererProvider.Context provider, EntityModel model, float shadowsize) {
+import static com.jojoskeleton.MainMod.MODID;
+
+public class JojoSkeletonRender extends MobRenderer<JojoSkeleton,JojoSkeletonModel<JojoSkeleton>> {
+    ResourceLocation TEXTURE = new ResourceLocation(MODID,"/textures/entity/jojo_skeleton.png");
+    public JojoSkeletonRender(EntityRendererProvider.Context provider, JojoSkeletonModel<JojoSkeleton> model, float shadowsize) {
         super(provider, model, shadowsize);
     }
 
-    public JojoSkeletonRender(EntityRendererProvider.Context provider) {
-        this(provider, new JojoSkeletonModel(provider.bakeLayer(new ModelLayerLocation(new ResourceLocation(""),""))), 0);
-    }
-
     @Override
-    public ResourceLocation getTextureLocation(Entity p_114482_) {
-        return new ResourceLocation("jojoskeleton");
+    public ResourceLocation getTextureLocation(JojoSkeleton p_114482_) {
+        return TEXTURE;
     }
 }

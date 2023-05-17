@@ -2,6 +2,7 @@ package com.jojoskeleton.client;
 
 import com.jojoskeleton.client.model.JojoSkeletonModel;
 import com.jojoskeleton.client.render.JojoSkeletonRender;
+import com.jojoskeleton.entity.JojoSkeleton;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,10 +15,14 @@ import static com.jojoskeleton.entity.Entities.JOJOSKELETON;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RenderModelLoader {
-    ModelLayerLocation JOJOSKELETONMLL = new ModelLayerLocation(new ResourceLocation("jojo_skeleton"),"models");
+    ModelLayerLocation JOJOSKELETONMLL = new ModelLayerLocation(new ResourceLocation("jojo_skeleton"),"main");
     @SubscribeEvent
     public void registerRender(RegisterRenderers e){
-        e.registerEntityRenderer(JOJOSKELETON.get(),provider-> new JojoSkeletonRender(provider,new JojoSkeletonModel(provider.bakeLayer(JOJOSKELETONMLL)),0));
+        e.registerEntityRenderer(JOJOSKELETON.get(),
+                provider-> new JojoSkeletonRender(
+                        provider,
+                        new JojoSkeletonModel<>(provider.bakeLayer(JOJOSKELETONMLL)),
+                        0));
     }
 
 
