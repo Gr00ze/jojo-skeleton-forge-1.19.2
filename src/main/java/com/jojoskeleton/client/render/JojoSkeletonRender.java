@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import static com.jojoskeleton.MainMod.MODID;
 @OnlyIn(Dist.CLIENT)
 public class JojoSkeletonRender extends MobRenderer<JojoSkeleton,JojoSkeletonModel<JojoSkeleton>> {
-    ResourceLocation TEXTURE = new ResourceLocation("jk:jojoskeleton");
+    public static ResourceLocation TEXTURE = new ResourceLocation(MODID,"textures/entity/jojo_skeleton.png");
     public JojoSkeletonRender(EntityRendererProvider.Context provider, JojoSkeletonModel<JojoSkeleton> model, float shadowsize) {
         super(provider, model, shadowsize);
     }

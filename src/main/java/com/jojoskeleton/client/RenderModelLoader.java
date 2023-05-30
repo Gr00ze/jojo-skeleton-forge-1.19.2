@@ -17,7 +17,7 @@ import static com.jojoskeleton.entity.Entities.JOJOSKELETON;
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RenderModelLoader {
-    static final ModelLayerLocation JOJOSKELETONMLL = new ModelLayerLocation(new ResourceLocation("jojo_skeleton"),"main");
+    static final ModelLayerLocation JOJOSKELETONMLL = new ModelLayerLocation(JojoSkeletonRender.TEXTURE,"main");
 
     @SubscribeEvent
     public static void registerRender(RegisterRenderers e){

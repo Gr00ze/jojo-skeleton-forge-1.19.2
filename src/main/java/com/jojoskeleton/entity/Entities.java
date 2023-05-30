@@ -24,6 +24,7 @@ public class Entities {
     public static final  RegistryObject<EntityType<JojoSkeleton>> JOJOSKELETON = ENTITIES
             .register("jojo_skeleton", () -> EntityType
                     .Builder.of(JojoSkeleton::new, MobCategory.MONSTER)
+                    .sized(2,5)
                     .fireImmune()
                     .build("jojo_skeleton"));
 
