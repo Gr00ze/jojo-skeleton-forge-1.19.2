@@ -1,5 +1,9 @@
 package com.jojoskeleton.entity;
 
+import com.google.common.base.Supplier;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -27,6 +31,15 @@ public class Entities {
                     .sized(2,5)
                     .fireImmune()
                     .build("jojo_skeleton"));
+
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister
+            .create(ForgeRegistries.SOUND_EVENTS,MODID);
+
+    static final Supplier<SoundEvent> boh = (Supplier<SoundEvent>) new SoundEvent(new ResourceLocation("jk:jojo_attack"));
+
+    public static final RegistryObject<SoundEvent> jja = SOUNDS.register( "jk:jojo_attack",boh);
+
+    //public static final SoundEvent jojo_attack = SOUNDS.register( "jk:jojo_attack",boh);
 
     @SubscribeEvent
     public static void addAttributes(EntityAttributeCreationEvent event){

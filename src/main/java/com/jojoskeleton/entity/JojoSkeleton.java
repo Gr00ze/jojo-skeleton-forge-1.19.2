@@ -1,7 +1,9 @@
 package com.jojoskeleton.entity;
 
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -13,6 +15,8 @@ import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
+import static com.jojoskeleton.entity.Entities.jojo_attack;
+
 public class JojoSkeleton extends Monster {
     public static final AttributeSupplier attributes = Mob.createMobAttributes()
             .add(Attributes.MAX_HEALTH,100)
@@ -23,7 +27,7 @@ public class JojoSkeleton extends Monster {
             .add(Attributes.MOVEMENT_SPEED,2)
             .build();
     public int lastTickcount = 0;
-    SoundEvent jojo_attack = new SoundEvent(new ResourceLocation("jk:jojo_attack"));
+
     public boolean soundon = false;
 
     public JojoSkeleton(EntityType<? extends JojoSkeleton> p_33002_, Level p_33003_) {
@@ -46,10 +50,10 @@ public class JojoSkeleton extends Monster {
         if ((!soundon || lastTickcount + 4000 < tickCount) && isplayernear){
             soundon = true;
             lastTickcount = tickCount;
-            float volume = 1,pitch = 0.5F;
+            float volume = 1,pitch = 1F;
             //playSound(jojo_attack);
             //level.playSound(near,this,jojo_attack, SoundSource.NEUTRAL,volume,pitch);
-            level.playLocalSound(this.getX(),this.getY(),this.getZ(),jojo_attack,SoundSource.HOSTILE,volume,pitch,true);
+            level.playLocalSound(this.getX(),this.getY(),this.getZ(), jojo_attack,this.getSoundSource(),volume,pitch,false);
             System.out.println("Entity jk: "+this+" play sound ");
         }
         if(isDeadOrDying()){
