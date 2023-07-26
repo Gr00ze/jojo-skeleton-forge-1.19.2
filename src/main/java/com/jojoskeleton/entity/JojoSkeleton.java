@@ -1,5 +1,7 @@
 package com.jojoskeleton.entity;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -39,21 +41,26 @@ public class JojoSkeleton extends Monster {
     @Override
     public void tick() {
         super.tick();
-        Player near = level.getNearestPlayer(this,10);
+        Player near = level.getNearestPlayer(this,30);
         boolean isplayernear = near!=null;
         //vengono riprodotti 2 volte ma sembra 1 ""\_ 0 u 0 _/"" probabilmente client & server
 
         if ((!soundon || lastTickcount + 4000 < tickCount) && isplayernear){
+
             soundon = true;
             lastTickcount = tickCount;
-            float volume = 1,pitch = 0.5F;
-            //playSound(jojo_attack);
+            float volume = 2.5F,pitch = 1F;
+            this.playSound(jojo_attack,volume,pitch);
             //level.playSound(near,this,jojo_attack, SoundSource.NEUTRAL,volume,pitch);
-            level.playLocalSound(this.getX(),this.getY(),this.getZ(),jojo_attack,SoundSource.HOSTILE,volume,pitch,true);
+            //level.playLocalSound(this.getX(),this.getY(),this.getZ(),jojo_attack,SoundSource.HOSTILE,volume,pitch,true);
+            this.level.playLocalSound(this.getX(), this.getEyeY(), this.getZ(), jojo_attack, this.getSoundSource(), volume, pitch, false);
             System.out.println("Entity jk: "+this+" play sound ");
         }
-        if(isDeadOrDying()){
-            this.soundon=false;
+        if(isDeadOrDying() || !isplayernear){
+            System.out.println("Entity jk: "+this+" stop sound ");
+            this.soundon = false;
+            lastTickcount =  tickCount - 4000;
+            Minecraft.getInstance().getSoundManager().stop();
         }
 
 
