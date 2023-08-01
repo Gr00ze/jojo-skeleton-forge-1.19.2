@@ -1,5 +1,6 @@
 package com.jojoskeleton.entity;
 
+import net.minecraft.core.Registry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +15,10 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
+
+//import static com.jojoskeleton.entity.Entities.jojo_attack;
 
 public class JojoSkeleton extends Monster {
     public static final AttributeSupplier attributes = Mob.createMobAttributes()
@@ -36,6 +41,15 @@ public class JojoSkeleton extends Monster {
     protected void registerGoals() {
         super.registerGoals();
         //this.goalSelector.addGoal(0,new FirstGoal(this));
+
+
+    }
+
+    @Override
+    protected AABB makeBoundingBox() {
+        AABB a = new AABB(getX(),getY(),getZ(),getX()+1,getY()+5,getZ());
+        AABB b = new AABB(getX(),getY(),getZ(),getX(),getY(),getZ()+5);
+        return a.minmax(b);
     }
 
     @Override
@@ -49,9 +63,11 @@ public class JojoSkeleton extends Monster {
 
             soundon = true;
             lastTickcount = tickCount;
-            float volume = 2.5F,pitch = 1F;
-            this.playSound(jojo_attack,volume,pitch);
+            float volume = 1,pitch = 1F;
+            //playSound(jojo_attack);
             //level.playSound(near,this,jojo_attack, SoundSource.NEUTRAL,volume,pitch);
+            SoundEvent jojo_attack = new SoundEvent(new ResourceLocation("jk:jojo_attack"));
+            level.playLocalSound(this.getX(),this.getY(),this.getZ(), jojo_attack,this.getSoundSource(),volume,pitch,false);
             //level.playLocalSound(this.getX(),this.getY(),this.getZ(),jojo_attack,SoundSource.HOSTILE,volume,pitch,true);
             this.level.playLocalSound(this.getX(), this.getEyeY(), this.getZ(), jojo_attack, this.getSoundSource(), volume, pitch, false);
             System.out.println("Entity jk: "+this+" play sound ");
